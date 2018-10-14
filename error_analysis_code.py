@@ -375,6 +375,7 @@ def main():
     resp_col = 16
     stim_type_col = 27
     condition_col = 13
+    block_col = 10
 
     # take in subject ID numbers from command line to run program
     for arg in sys.argv[1:]:
@@ -393,13 +394,19 @@ def main():
                 # reads in subject-level information for output file
                 subject_ids = []
                 conditions = []
+                blocks = []
                 reader = csv.reader(f, delimiter=',')
                 for line in reader:
                     subject_ids.append(line[subject_id_col])
-                    conditions.append(line[condition_col])
+                    # correct mis-labeled data
+                    if 'A LETTER FELL on the FLOOR' in line[key_col]:
+                        conditions.append('8Talker')
+                    else:
+                        conditions.append(line[condition_col])
+                    blocks.append(line[block_col])
 
 
-                temp = ["subject_id", "condition", "key_sentence", "resp_sentence"]
+                temp = ["subject_id", "condition", "block", "key_sentence", "resp_sentence"]
                 for key, value in all_errors[0].items():
                     temp.append(key)
                 temp.append("total_errors")
@@ -414,6 +421,7 @@ def main():
                     line_to_write = []
                     line_to_write.append(subject_ids[i])
                     line_to_write.append(conditions[i])
+                    line_to_write.append(blocks[i])
 
                     key_align_string = ""
                     for word in all_alignments[i][0]:
