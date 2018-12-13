@@ -1,0 +1,197 @@
+---
+title: Statistical analysis guide for
+subtitle: Error patterns of native and non-native listeners’ perception of speech in noise
+author: "Benjamin Zinszer, Meredith Riggs, Rachel Reetzke, & Bharath Chandrasekaran"
+date: "December 12, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Compile the datasets
+Before beginning the analyses, if you haven't already done so, compile the E-prime output files into the merged .txt files (`merge_full.txt` and `merge_subset.txt`) that will be used in the analyses. If you already have these files (and they represented the complete dataset), no need to run it again.
+
+Make sure to update the first line of code in `data_compiler_20181009.R` to reflect the path to the output files on your own computer before you run it:
+`path = "~/Documents/Projects/EAB/outputs_with_block/"`
+
+### Import needed libraries
+The following libraries are required to perform the analyses that appear below. If you don't already have these libraries (and their dependencies) installed, run `install.packages('name_of_library')` for each package, using the name of the missing library to download and install it. Then run the `library` command to load it.
+```{r libraries, message=FALSE, warning=FALSE}
+library(lme4)
+library(lmerTest)
+library(plyr)
+library(effsize)
+```
+
+### Import and clean up the data
+When the merged dataset file has been prepared, import it into R. 
+```{r import_main1, message=FALSE, warning=FALSE}
+mydata <- read.csv('merge_full.txt')
+```
+To perform the analyses with a subset of the data, encompassing only the first eight appearances of each mask type for each subject (to balance the number of trials per mask type encountered in the experiment), simply run this line instead: `mydata <- read.csv('merge_subset.txt')`
+
+Several small formatting changes need to be made in order to prepare this file for analysis:
+
+* Label `native` participants (native English speakers) as those participants with Subject_ID # less than 2000
+
+* Label `nonnative` participants (non-native English speakers) with Subject_ID # greater than or equal to 2000
+
+* Re-level the conditions to treat `SSN` as the reference or baseline condition
+```{r import_main2, message=FALSE, warning=FALSE}
+mydata$group[mydata$subject_id<2000] <- 'native'
+mydata$group[mydata$subject_id>=2000] <- 'nonnative'
+mydata$condition <- relevel(mydata$condition,'SSN')
+```
+Further, several small steps (not enumerated here) to extract each error type and re-combine the datasets are outlined contained in the Markdown source used to generate this file: `Supplemental-Statistical_analyses_in_R.Rmd`. The source file is provided in this repository and can be viewed and/or executed in R.
+```{r import_ext, echo=FALSE}
+# Expand and rebind for morphosyntactic and content word errors
+morphdat <- mydata[mydata$DNH!=1,]
+morphdat$error_type <- 'morph'
+morphdat$error_rate <- morphdat$total_morph_errors/morphdat$total.num.words
+worddat <- mydata[mydata$DNH!=1,]
+worddat$error_type <- 'content'
+worddat$error_rate <- worddat$total_cont_errors/worddat$total.num.words
+mydata_errors <- rbind(morphdat,worddat)
+
+# Build the subject-level datasets
+mydata_subj <- ddply(mydata_errors,c('group','subject_id','condition','error_type'),
+                     summarise,
+                     error_rate = mean(error_rate))
+```
+
+# Estimate the models
+
+### Model of DNH (Did Not Hear) errors
+```{r DNH_model, warnings=FALSE}
+dnh_model <- glmer(DNH~(1|subject_id)+group*condition,mydata,family='binomial')
+summary(dnh_model)
+anova(dnh_model)
+```
+
+### Omnibus Model with Error Type
+```{r omni_model, warnings=FALSE}
+omni_model <- lmer(error_rate~(1|subject_id)+group*condition*error_type,mydata_errors[mydata_errors$error_type!='dnh',])
+summary(omni_model)
+anova(omni_model)
+```
+
+#### Word-Level Analysis
+```{r word_model, warnings=FALSE}
+contentword <- lmer(error_rate~(1|subject_id)+group*condition,worddat)
+summary(contentword)
+anova(contentword)
+```
+
+#### Morphosyntactic-Level Analysis
+```{r moprh_model, warnings=FALSE}
+morphemes <- lmer(error_rate~(1|subject_id)+group*condition,morphdat)
+summary(morphemes)
+anova(morphemes)
+```
+
+# Perform planned and post-hoc tests
+Post-hoc comparisons are performed on subject-level error rates for native vs. non-native participants
+```{r subj_plyr, echo=TRUE, message=FALSE, warning=FALSE}
+mydata_subj_bal <- ddply(mydata_subj, c('group','subject_id','error_type'),
+                         summarise, 
+                         error_rate = mean(error_rate))
+```
+
+### Content-word comparisons
+```{r subj_post_word, echo=TRUE, message=FALSE, warning=FALSE}
+t.test(
+  mydata_subj_bal$error_rate[mydata_subj_bal$group=='nonnative' & mydata_subj_bal$error_type=='content'],
+  mydata_subj_bal$error_rate[mydata_subj_bal$group=='native' & mydata_subj_bal$error_type=='content']
+)
+cohen.d(
+  mydata_subj_bal$error_rate[mydata_subj_bal$group=='nonnative' & mydata_subj_bal$error_type=='content'],
+  mydata_subj_bal$error_rate[mydata_subj_bal$group=='native' & mydata_subj_bal$error_type=='content'],
+  na.rm=TRUE
+)
+```
+
+### Morphosyntactic comparisons
+```{r subj_post_morph, echo=TRUE, message=FALSE, warning=FALSE}
+t.test(
+  mydata_subj_bal$error_rate[mydata_subj_bal$group=='nonnative' & mydata_subj_bal$error_type=='morph'],
+  mydata_subj_bal$error_rate[mydata_subj_bal$group=='native' & mydata_subj_bal$error_type=='morph']
+)
+cohen.d(
+  mydata_subj_bal$error_rate[mydata_subj_bal$group=='nonnative' & mydata_subj_bal$error_type=='morph'],
+  mydata_subj_bal$error_rate[mydata_subj_bal$group=='native' & mydata_subj_bal$error_type=='morph'],
+  na.rm=TRUE
+)
+```
+
+## Between-condition planned comparisons
+### Content-word level
+Subject-level comparisons for mask types and erorr types are aggregated in another set of code detailed in the markdown file `Supplemental-Statistical_analyses_in_R.Rmd` (but not explicitly stated here) to prepare the data for the next set of tests:
+```{r paired_post, echo=TRUE, message=FALSE, warning=FALSE}
+mydata_paired = data.frame(subject_id = unique(mydata_subj$subject_id),Mask1T=NA,Mask2T=NA,Mask8T=NA,MaskSSN=NA)
+```
+
+```{r paired_post2, echo=FALSE}
+for(ss in 1:length(mydata_paired$subject_id)){
+  mydata_paired[ss,]$Mask1T <- mydata_subj$error_rate[mydata_subj$subject_id==mydata_paired$subject_id[ss] &
+                                                      mydata_subj$error_type=='content' & mydata_subj$condition=='1T'][1]
+  mydata_paired[ss,]$Mask2T <- mydata_subj$error_rate[mydata_subj$subject_id==mydata_paired$subject_id[ss] & 
+                                                        mydata_subj$error_type=='content' & mydata_subj$condition=='2Talker'][1]
+  mydata_paired[ss,]$Mask8T <- mydata_subj$error_rate[mydata_subj$subject_id==mydata_paired$subject_id[ss] & 
+                                                        mydata_subj$error_type=='content' & mydata_subj$condition=='8Talker'][1]
+  mydata_paired[ss,]$MaskSSN <- mydata_subj$error_rate[mydata_subj$subject_id==mydata_paired$subject_id[ss] & 
+                                                        mydata_subj$error_type=='content' & mydata_subj$condition=='SSN'][1]
+}
+```
+#### 1-Talker vs. SSN
+```{r paired_post_1Tw, echo=TRUE, message=FALSE, warning=FALSE}
+t.test(mydata_paired$Mask1T,
+       mydata_paired$MaskSSN,
+       paired=TRUE)
+```
+#### 2-Talker vs. SSN
+```{r paired_post_2Tw, echo=TRUE, message=FALSE, warning=FALSE}
+t.test(mydata_paired$Mask2T,
+       mydata_paired$MaskSSN,
+       paired=TRUE)
+```
+#### 8-Talker vs. SSN
+```{r paired_post_8Tw, echo=TRUE, message=FALSE, warning=FALSE}
+t.test(mydata_paired$Mask8T,
+       mydata_paired$MaskSSN,
+       paired=TRUE)
+```
+
+### Morphosyntactic level
+```{r paired_post3, echo=FALSE}
+for(ss in 1:length(mydata_paired$subject_id)){
+  mydata_paired[ss,]$Mask1T <- mydata_subj$error_rate[mydata_subj$subject_id==mydata_paired$subject_id[ss] & 
+                                                        mydata_subj$error_type=='morph' & mydata_subj$condition=='1T'][1]
+  mydata_paired[ss,]$Mask2T <- mydata_subj$error_rate[mydata_subj$subject_id==mydata_paired$subject_id[ss] & 
+                                                        mydata_subj$error_type=='morph' & mydata_subj$condition=='2Talker'][1]
+  mydata_paired[ss,]$Mask8T <- mydata_subj$error_rate[mydata_subj$subject_id==mydata_paired$subject_id[ss] & 
+                                                        mydata_subj$error_type=='morph' & mydata_subj$condition=='8Talker'][1]
+  mydata_paired[ss,]$MaskSSN <- mydata_subj$error_rate[mydata_subj$subject_id==mydata_paired$subject_id[ss] & 
+                                                         mydata_subj$error_type=='morph' & mydata_subj$condition=='SSN'][1]
+}
+```
+
+#### 1-Talker vs. SSN
+```{r paired_post_1Tm, echo=TRUE, message=FALSE, warning=FALSE}
+t.test(mydata_paired$Mask1T,
+       mydata_paired$MaskSSN,
+       paired=TRUE)
+```
+#### 2-Talker vs. SSN
+```{r paired_post_2Tm, echo=TRUE, message=FALSE, warning=FALSE}
+t.test(mydata_paired$Mask2T,
+       mydata_paired$MaskSSN,
+       paired=TRUE)
+```
+#### 8-Talker vs. SSN
+```{r paired_post_8Tm, echo=TRUE, message=FALSE, warning=FALSE}
+t.test(mydata_paired$Mask8T,
+       mydata_paired$MaskSSN,
+       paired=TRUE)
+```
