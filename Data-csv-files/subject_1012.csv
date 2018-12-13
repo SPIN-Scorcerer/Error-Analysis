@@ -1,0 +1,65 @@
+aaa,Subject,Block,0,,,,0,0,0,,,FileText,Noise,,,Slide1.RESP
+,1012,41,0,,,,0,0,0,,,A MAN is TURNING the FAUCET.   ,1T,,,A man is turning the faucet{.}{ESCAPE}
+,1012,47,0,,,,0,0,0,,,The FIRE was VERY HOT.   ,1T,,,The oven is too hot{.}{ESCAPE}
+,1012,40,0,,,,0,0,0,,,HE is SUCKING his THUMB.   ,1T,,,He is sucking his thumb{.}{ESCAPE}
+,1012,48,0,,,,0,0,0,,,The SHOP CLOSED for LUNCH.   ,1T,,,The football hit the goal post{.}{ESCAPE}
+,1012,1,0,,,,0,0,0,,,The DRIVER STARTED the ENGINE.   ,1T,,,people wear stripes{ESCAPE}
+,1012,32,0,,,,0,0,0,,,The BOY HURRIED to SCHOOL.   ,1T,,,The boy to school{ESCAPE}
+,1012,12,0,,,,0,0,0,,,Some NICE PEOPLE are COMING.   ,1T,,,The nice people are coming{.}{ESCAPE}
+,1012,7,0,,,,0,0,0,,,SHE BUMPED her HEAD.   ,1T,,,She bumped her head{.}{ESCAPE}
+,1012,30,0,,,,0,0,0,,,THEY MET SOME FRIENDS.   ,1T,,,They met some friends{.}{ESCAPE}
+,1012,21,0,,,,0,0,0,,,FLOWERS GROW in the GARDEN.   ,1T,,,The raincoat is hanging up{.}{ESCAPE}
+,1012,54,0,,,,0,0,0,,,The TINY BABY was PRETTY.   ,1T,,,The tiny baby was prissed{.}{ESCAPE}
+,1012,55,0,,,,0,0,0,,,The DAUGHTER SET the TABLE.   ,1T,,,The daughter set the table{.}{ESCAPE}
+,1012,35,0,,,,0,0,0,,,THEY WALKED ACROSS the GRASS.   ,1T,,,They walked across the grass{.}{ESCAPE}
+,1012,51,0,,,,0,0,0,,,MOTHER TIED the STRING.   ,1T,,,Mother tied the string{.}{ESCAPE}
+,1012,39,0,,,,0,0,0,,,The TRAIN STOPS at the STATION.   ,1T,,,The train stops at the station{.}{ESCAPE}
+,1012,34,0,,,,0,0,0,,,The PUPPY PLAYS with a BALL.   ,1T,,,The puppy plays with the ball{.}{ESCAPE}
+,1012,36,0,,,,0,0,0,,,The CHILDREN DROPPED the BAG,2Talker,,,The children dropped the bag{.}{ESCAPE}
+,1012,29,0,,,,0,0,0,,,The DOG CAME BACK.   ,2Talker,,,The dog came back{.}{ESCAPE}
+,1012,25,0,,,,0,0,0,,,The FLOOR LOOKED CLEAN. ,2Talker,,,The floor looked clean{.}{ESCAPE}
+,1012,45,0,,,,0,0,0,,,SHE FOUND her PURSE.,2Talker,,,She found her purse{.}{ESCAPE}
+,1012,63,0,,,,0,0,0,,,The FRUIT IS on the GROUND.   ,2Talker,,,The fruit is on the ground{.}{ESCAPE}
+,1012,24,0,,,,0,0,0,,,MOTHER GOT a SAUCEPAN.,2Talker,,,Mother got a sinus pain{ESCAPE}
+,1012,5,0,,,,0,0,0,,,THEY WASHED in COLD WATER.   ,2Talker,,,has 28 days{ESCAPE}
+,1012,6,0,,,,0,0,0,,,The YOUNG PEOPLE are DANCING.,2Talker,,,the young people are dancing{.}{ESCAPE}
+,1012,10,0,,,,0,0,0,,,The BUS LEFT EARLY.   ,2Talker,,,The bus left the{ESCAPE}
+,1012,64,0,,,,0,0,0,,,THEY had TWO EMPTY BOTTLES.   ,2Talker,,,It had two ice bottles{ESCAPE}
+,1012,4,0,,,,0,0,0,,,The BALL is BOUNCING very HIGH.   ,2Talker,,,heard the ticking of the bomb{ESCAPE}
+,1012,3,0,,,,0,0,0,,,FATHER FORGOT the BREAD.   ,2Talker,,,the shoe was trained by their coach{ESCAPE}
+,1012,43,0,,,,0,0,0,,,The GIRL has a PICTURE BOOK.   ,2Talker,,,The girl has a picture book{.}{ESCAPE}
+,1012,42,0,,,,0,0,0,,,The ORANGE was VERY SWEET.   ,2Talker,,,The orange was very sweet{.}{ESCAPE}
+,1012,23,0,,,,0,0,0,,,HE is HOLDING his NOSE.   ,2Talker,,,X{ESCAPE}
+,1012,11,0,,,,0,0,0,,,The NEW ROAD is on the MAP.   ,2Talker,,,The new road{ESCAPE}
+,1012,62,0,,,,0,0,0,,,The BOOK TELLS a STORY.   ,8Talker,,,The book told the story{.}{ESCAPE}
+,1012,8,0,,,,0,0,0,,,The YOUNG BOY LEFT HOME.   ,8Talker,,,The young boy{ESCAPE}
+,1012,53,0,,,,0,0,0,,,THEY are CLIMBING the TREE.   ,8Talker,,,They are climbing the{ESCAPE}
+,1012,27,0,,,,0,0,0,,,SHE STOOD near her WINDOW.   ,8Talker,,,She stood near the window{.}{ESCAPE}
+,1012,57,0,,,,0,0,0,,,A LETTER FELL on the FLOOR.   ,8Talker,,,X{ESCAPE}
+,1012,9,0,,,,0,0,0,,,The FIVE MEN are WORKING.    ,8Talker,,,The five men are working{ESCAPE}
+,1012,38,0,,,,0,0,0,,,The DISHCLOTH is VERY WET.  ,8Talker,,,The dishwasher is very wet{.}{ESCAPE}
+,1012,19,0,,,,0,0,0,,,The BABY BROKE his CUP.   ,8Talker,,,X{ESCAPE}
+,1012,60,0,,,,0,0,0,,,The TABLE has THREE LEGS.   ,SSN,,,The table has three legs{.}{ESCAPE}
+,1012,14,0,,,,0,0,0,,,HE LISTENED TO his FATHER.   ,SSN,,,He listened to his mom{.}{ESCAPE}
+,1012,46,0,,,,0,0,0,,,THEY WENT on a VACATION.   ,SSN,,,They went on vacation{.}{ESCAPE}
+,1012,31,0,,,,0,0,0,,,The LADY PACKED her BAG.   ,SSN,,,The lady packed her bag{.}{ESCAPE}
+,1012,17,0,,,,0,0,0,,,The DINNER PLATE is HOT.   ,SSN,,,The dinner plate is hot{.}{ESCAPE}
+,1012,18,0,,,,0,0,0,,,The TRAIN is MOVING FAST.   ,SSN,,,The train{'}s moving fast{.}{ESCAPE}
+,1012,44,0,,,,0,0,0,,,The CHILD DRANK some MILK.   ,SSN,,,The child drinks milk{.}{ESCAPE}
+,1012,2,0,,,,0,0,0,,,The CAR HIT a WALL.   ,SSN,,,the car hit the wall{ESCAPE}
+,1012,56,0,,,,0,0,0,,,A DISH TOWEL is by the SINK.   ,SSN,,,The dish towel was by the sink{.}{ESCAPE}
+,1012,20,0,,,,0,0,0,,,The JANITOR USED a BROOM.   ,SSN,,,The janitor used a broom{.}{ESCAPE}
+,1012,58,0,,,,0,0,0,,,THEY SAT on a WOODEN BENCH.   ,SSN,,,X{ESCAPE}
+,1012,52,0,,,,0,0,0,,,The GOOD BOY is HELPING.   ,SSN,,,The good boy is helping{.}{ESCAPE}
+,1012,49,0,,,,0,0,0,,,THEY FOLLOWED the PATH.   ,SSN,,,They followed the path{.}{ESCAPE}
+,1012,22,0,,,,0,0,0,,,The KITCHEN CLOCK was WRONG.   ,SSN,,,The pigeon clock is wrong{.}{ESCAPE}
+,1012,50,0,,,,0,0,0,,,The DOG JUMPED ON the CHAIR.   ,SSN,,,The dog jumped on the chair{.}{ESCAPE}
+,1012,15,0,,,,0,0,0,,,SOMEONE is CROSSING the ROAD.   ,SSN,,,Someone{'}s crossing the road{.}{ESCAPE}
+,1012,13,0,,,,0,0,0,,,The MAILMAN BROUGHT a LETTER.   ,SSN,,,The mailman is unlucky{.}{ESCAPE}
+,1012,37,0,,,,0,0,0,,,THEY are RIDING their BICYCLES.   ,SSN,,,They are riding the bicycles{.}{ESCAPE}
+,1012,33,0,,,,0,0,0,,,HE BROKE his LEG.   ,SSN,,,X{ESCAPE}
+,1012,59,0,,,,0,0,0,,,The MILK was by the FRONT DOOR.   ,SSN,,,The milk was by the front door{.}{ESCAPE}
+,1012,28,0,,,,0,0,0,,,The SHIRTS are HANGING in the CLOSET.   ,SSN,,,The shirts are hanging in the closet{.}{ESCAPE}
+,1012,26,0,,,,0,0,0,,,The GROUND was VERY HARD.   ,SSN,,,The ground is very hard{.}{ESCAPE}
+,1012,16,0,,,,0,0,0,,,The BUCKETS HOLD WATER.   ,SSN,,,The buckets are walking{ESCAPE}
+,1012,61,0,,,,0,0,0,,,The CHICKEN LAID some EGGS.   ,SSN,,,The chicken laid some eggs{.}{ESCAPE}
